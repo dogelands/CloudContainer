@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "Content-type: text/html"
+echo ""
+echo ">正在清除容器.."
+echo ""
+. ./load-conf
+rm -rf $rootfs_dir/*
+echo ">完成"
+echo ""

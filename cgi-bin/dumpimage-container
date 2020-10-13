@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "Content-type: text/html"
+echo ""
+. ./load-conf
+echo ">正在打包镜像.."
+cd $rootfs_dir/
+rm download.html
+rm imagz.tgz
+tar czvf $work_dir/res/image.tgz --exclude='./dev' --exclude='./sys' --exclude='./proc' --exclude='./download.html' ./ >>/dev/null
+echo ">正在启动下载..."
+# Create LoadHtml and LoadHtml
+cat <<- EOF > "download.html"
+<meta http-equiv="refresh" content="1;url=/res/image.tgz">
+EOF
+cat download.html
+rm download.html
+echo ""

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>云容器v0.0.1</title>
+  <script type="text/javascript" src="https://api.uixsj.cn/hitokoto/get?type=hitokoto&code=js"></script>
+  <link rel="stylesheet" href="./res/css/mdui.min.css">
+</head>
+<body>
+ <!-- 顶栏 -->
+<div class="mdui-toolbar">
+  <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#main-drawer', swipe: true}"><i class="mdui-icon material-icons">menu</i></span>
+  <span class="mdui-typo-title">云容器</span>
+  <div class="mdui-toolbar-spacer"></div>
+  <a href="/index.html" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>
+</div>
+ <!-- 主内容 -->
+<div class="mdui-typo">
+  <blockquote>
+    <p><div id="hitokoto"><script>hitokoto()</script></div></p>
+    
+  </blockquote>
+</div>
+</div>
+
+<a href="/cgi-bin/run-container" class="mdui-btn mdui-btn-raised">启动</a>
+<a href="/cgi-bin/stop-container" class="mdui-btn mdui-btn-raised">停止</a>
+<a href="/cgi-bin/reset-container" class="mdui-btn mdui-btn-raised">重启</a>
+ <!-- 侧边栏 -->
+
+<div class="mdui-drawer" id="main-drawer">
+  <div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+          <div class="mdui-collapse-item ">
+        <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">near_me</i>
+            <a href="/index.html" class="mdui-list-item-content">控制台</a>
+          <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+        </div>
+       
+          <div class="mdui-collapse-item ">
+        <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">layers</i>
+          <a href="/res/setup.html" class="mdui-list-item-content">管理</a>
+          <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+        </div>
+       
+      
+          <div class="mdui-collapse-item ">
+        <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">local_mall</i>
+          <a href="/res/resource.html" class="mdui-list-item-content">资源</a>
+          <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+        </div>
+      </div>
+      </div>
+</div>
+
+ <!-- Footer -->
+<script src="./res/js/mdui.min.js"></script>
+
+</body>
+</html>

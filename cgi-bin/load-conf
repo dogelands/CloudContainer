@@ -1,0 +1,5 @@
+# Configs Loader
+rootfs_dir=$(cat ../configs/rootfs_dir.conf)
+init_cmd=$(cat ../configs/init_cmd.conf)
+container_id=$(cat ../configs/container_id.conf)
+work_dir=$(cd .. && pwd)

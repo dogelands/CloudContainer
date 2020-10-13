@@ -1,0 +1,19 @@
+#!/system/bin/sh
+
+echo "Content-type: text/html"
+echo ""
+echo ">正在停止容器..."
+echo ""
+. ./load-conf
+pkill dropbear
+umount $rootfs_dir/sys
+umount $rootfs_dir/dev/pts
+umount $rootfs_dir/dev
+umount $rootfs_dir/proc
+echo ">行了"
+cat <<- EOF > "download.html"
+<meta http-equiv="refresh" content="1;url=/index.html">
+EOF
+cat download.html
+rm download.html
+echo ""

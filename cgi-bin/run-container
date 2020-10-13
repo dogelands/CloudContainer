@@ -1,0 +1,74 @@
+#!/system/bin/sh
+
+echo "Content-type: text/html"
+echo ""
+# StartWebSocket
+echo ">容器启动中..."
+echo ""
+# Run
+. ./load-conf
+if [ -e "$rootfs_dir/proc/self/" ];then
+ echo "">/dev/null
+  else
+ echo "- /proc ..."
+   mount -t proc proc $rootfs_dir/proc
+fi
+
+if [ -d "$rootfs_dir/sys/kernel/" ];then
+ echo "">/dev/null
+  else
+ echo "- /sys ..."
+  mount -t sysfs sysfs $rootfs_dir/sys
+fi
+
+if [ -d "$rootfs_dir/dev/tty/" ];then
+  echo "">/dev/null
+  else
+  echo "- /dev ..."
+  mount -o bind /dev/ $rootfs_dir/dev
+fi
+
+if [ -e "$rootfs_dir/dev/pts/0" ];then
+  echo "">/dev/null
+  else
+  echo "- /dev/pts ..."
+  mount -t devpts devpts $rootfs_dir/dev/pts
+fi
+
+if [ -d "/dev/shm" ];then
+ echo "">/dev/null
+  else
+ echo "- /dev/shm ..."
+  mkdir -p /dev/shm
+fi
+
+if [ ! -e "/dev/tty0" ]; then
+  echo "">/dev/null
+  else
+  echo "- /dev/tty ... "
+  ln -s /dev/null /dev/tty0
+fi
+if [ ! -e "/dev/fd" -o ! -e "/dev/stdin" -o ! -e "/dev/stdout" -o ! -e "/dev/stderr" ]; then
+    echo "/dev/fd ... "
+    [ -e "/dev/stdin" ] || ln -s /proc/self/fd/0 /dev/stdin
+    [ -e "/dev/stdout" ] || ln -s /proc/self/fd/1 /dev/stdout
+    [ -e "/dev/stderr" ] || ln -s /proc/self/fd/2 /dev/stderr
+fi
+        
+if [ -d "$rootfs_dir/mnt/host-rootfs/" ];then
+  echo "">/dev/null
+  else
+  echo "- /mnt/host-rootfs ..."
+  ln -s /proc/self/cwd $rootfs_dir/mnt/host-rootfs
+fi
+
+unset TMP TEMP TMPDIR LD_PRELOAD LD_DEBUG
+PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games:/usr/local/sbin:/sbin
+exec ../bin/busybox chroot $rootfs_dir $init_cmd &
+echo ">容器启动成功,已在后台运行."
+cat <<- EOF > "download.html"
+<meta http-equiv="refresh" content="1;url=/index.html">
+EOF
+cat download.html
+rm download.html
+echo ""
